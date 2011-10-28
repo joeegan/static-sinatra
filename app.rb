@@ -1,4 +1,4 @@
-# rubygems required
+# required rubygems
 require 'sinatra'
 require 'sinatra/reloader'
 require 'redcloth_scan'
@@ -21,24 +21,7 @@ require './helpers/navigation'
 helpers Sinatra::Navigation
 require './helpers/custom'
 helpers Sinatra::Custom
-
-# ensure that every rack request creates a new css file
-use Sass::Plugin::Rack
-Sass::Plugin.options[:css_location] = "public/stylesheets"
-Sass::Plugin.options[:template_location] = "views/sass"
-
-# compass/sass config
-configure do
-  Compass.configuration do |config|
-    config.project_path = File.dirname(__FILE__)
-    config.sass_dir = 'stylesheets'
-    config.images_dir = './images'
-    config.http_path = "/"
-    config.http_images_path = "../images"
-    config.http_stylesheets_path = "./stylesheets"
-  end
-  set :sass, Compass.sass_engine_options
-end
+require './config/sass'
 
 
 # routes
@@ -52,12 +35,6 @@ end
   get path do
     redirect to('/fish/index.html')
   end
-end
-
-get "/index.html" do
-  haml :"pages/index", {
-    :layout => :"layouts/docs"
-  }
 end
 
 get "/:primary/index.html" do
@@ -76,7 +53,8 @@ get "/:primary/:secondary/index.html" do
       :secondary_name => params[:secondary],
       :primary_token => params[:primary],
       :primary_url => params[:primary]+"/",
-      :is_secondary => true
+      :is_secondary => true,
+      :is_tertiary => true
     }
   }
 end

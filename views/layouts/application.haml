@@ -14,7 +14,6 @@
     =stylesheet "stylesheets/nav"
     =stylesheet "stylesheets/footer"
 
-
     =javascript "javascripts/application"
 
   %body
@@ -22,12 +21,14 @@
       = partial :"partials/header"
       = partial :"partials/nav"
 
+      -# remove if only one level of nav required...
       = partial :"partials/secondary_nav", :locals => { |
         :section => defined?(section) ? section : "", |
         :is_secondary => defined?(is_secondary) ? true : false, |
         :is_tertiary => defined?(is_tertiary) ? true : false |
       } |
 
+      -# remove if only two levels of nav required...
       = partial :"partials/tertiary_nav", :locals => { :section => defined?(section) ? section : "", :is_secondary => defined?(is_secondary) ? true : false, :is_tertiary => defined?(is_tertiary) ? true : false }
 
       #body-wrapper

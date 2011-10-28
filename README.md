@@ -6,15 +6,14 @@ for a static <span class="caps">HTML</span> site</p>
 <h2>Quick start</h2>
 
 <ul>
-	<li>Download the code - <code>git clone git@github.com:cimex/arcelor-mittal.git</code></li>
-	<li>in the terminal, cd to that dir and <code>bundle install</code></li>
+	<li>in the terminal, cd to your clone of this repo and <code>bundle install</code></li>
 	<li>then <code>ruby app.rb</code></li>
-	<li>in your browser, got to http://localhost:4567/ and you should be up and running</li>
+	<li>in your browser, got to <a href="http://localhost:4567/">http://localhost:4567/</a> and you should be up and running</li>
 </ul>
 
-<h2 id="developing-and-editing">Developing and editing</h2>
+<h2>Developing and editing</h2>
 
-<h3 id="application-structure">Application structure</h3>
+<h3>Application structure</h3>
 
 <p>+ <b>helpers</b> - small handy ruby tools<br />
 + <b>public</b> - images, javascripts, css, flash<br />
@@ -30,7 +29,7 @@ for a static <span class="caps">HTML</span> site</p>
 + <b>test</b> - theres a rake task and results.html in here that scrapes all the static files for errors<br />
 </p>
 
-<h2 id="running-the-application">Running the application</h2>
+<h2>Running the application</h2>
 
 <h4>Mac <span class="caps">OSX</span></h4>
 <p><code>ruby app.rb</code></p>
@@ -44,7 +43,7 @@ yet.</p>
 
 <p>Now you can see your local modifications at <a href="http://localhost:4567/">http://localhost:4567/</a></p>
 
-<h2 id="building-the-html-templates">Building the <span class="caps">HTML</span>
+<h2>Building the <span class="caps">HTML</span>
 templates</h2>
 
 <h3>Mac <span class="caps">OSX</span></h3>
@@ -58,13 +57,13 @@ templates</h2>
 server,<br />
 and write it to the static folder.</p>
 
-<h2 id="exporting">Exporting a stand alone version of the sites</h2>
+<h2>Exporting a stand alone version of the sites</h2>
 <ul>
 	<li>Build the app (see above)</li>
 	<li>Copy the contents of <code>public</code> and the contents of <code>static</code> to your desired location/zip</li>
 </ul>
 
-<h2 id="testing">Testing</h2>
+<h2>Testing</h2>
 
 <p>There is a very simple test suite that uses Rspec, in the test directory</p>
 <p>Make sure to build the files before running the tests</p>
@@ -73,7 +72,7 @@ and write it to the static folder.</p>
 <p>A report will then be generated that you can open manually in your browser
 (<code>results.html</code>)</p>
 
-<h2 id="modifying-the-css"><strong>Modifying the <span class="caps">CSS</span></strong></h2>
+<h2><strong>Modifying the <span class="caps">CSS</span></strong></h2>
 
 <p>The <span class="caps">CSS</span> has been written in a meta-language called
 <a href="http://sass-lang.com/">Sass</a>. You can go right ahead and edit the<br />
@@ -86,7 +85,7 @@ Sass files inside <code>views/sass/core.sass</code> and these will appear at <a 
 <p>In order to make our navigation work, the folder structure inside <code>/views/pages/</code> should be mirrored in <code>/helpers/navigation.rb</code></p>
 
 
-<h2 id="why-not-staticmatic">Extend</h2>
+<h2>Extend</h2>
 <p><strong>Note: if you change a helper file you will need to stop the preview and restart it to see your changes</strong></p>
 
 <p>Sinatra has good, comprehensive documentation, see:</p>
@@ -99,7 +98,7 @@ Sass files inside <code>views/sass/core.sass</code> and these will appear at <a 
 	<li><strong><a href="http://sinatra-book.gittr.com/">Book</a></strong></li>
 </ul>
 
-<h2 id="technical-diffs"><strong>Technical differences to Staticmatic</strong></h2>
+<h2><strong>Technical differences to Staticmatic</strong></h2>
 <ul>
 	<li>You set up your own routes in the app file</li>
 	<li>The site (outputted html files) folder is created one directory up from

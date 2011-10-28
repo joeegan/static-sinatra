@@ -5,7 +5,7 @@
     -if url_match?(primary_token)
       -primary_hash[:children].each_with_index do |secondary_hash, secondary_idx|
         -secondary_token = get_token secondary_hash
-        -if defined?(secondary_hash[:children]) and url_match?(secondary_token)
+        -if !secondary_hash[:children].nil? and url_match?(secondary_token)
           .nav.sub-nav.sub-sub-nav
             %ul
               -secondary_hash[:children].each_with_index do |tertiary_hash, tertiary_idx|

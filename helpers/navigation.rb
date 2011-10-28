@@ -5,7 +5,13 @@ module Sinatra::Navigation
       {
         :title => "Fish",
         :children => [
-          {:title => "History of classification", :rewrite => "history"},
+          {:title => "History of classification", :rewrite => "history",
+           :children => [
+             {:title => "Reptilian lungs", :rewrite => "lungs"},
+             {:title => "Turtles and tortoises"},
+             {:title => "Palate"}
+           ]
+          },
           {:title => "Taxonomy"}
         ]
       },
