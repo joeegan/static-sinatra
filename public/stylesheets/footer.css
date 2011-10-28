@@ -1,0 +1,64 @@
+#footer {
+  margin: 0;
+  padding: 20px;
+  background: url(/images/textures/black-check.gif);
+  background-color: black;
+  color: white;
+  position: relative;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  width: 970px;
+  height: 20px; }
+  #footer .left {
+    margin: 0 auto; }
+  #footer p, #footer a {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none; }
+    #footer p:hover, #footer a:hover {
+      color: #f15934; }
+  #footer p {
+    font-weight: normal; }
+  #footer a.first {
+    background: url(../images/icons/location.png) 0 0 no-repeat;
+    padding-left: 20px; }
+  #footer .central {
+    text-align: center;
+    margin: 0 auto;
+    width: 580px;
+    float: left; }
+    #footer .central ul {
+      margin: 0;
+      padding: 0; }
+    #footer .central li {
+      display: inline;
+      padding-right: 10px; }
+  #footer .right {
+    position: absolute;
+    right: 20px;
+    top: 20px; }
+    #footer .right p, #footer .right a {
+      float: left;
+      margin: -1px 0 0 10px;
+      padding: 1px 0;
+      display: block; }
+    #footer .right a.backwards {
+      background: url(../images/buttons/back-white.png) 0 0 no-repeat;
+      padding-left: 26px; }
+    #footer .right a.onward {
+      background: url(../images/buttons/forward-white.png) 100% 0 no-repeat;
+      padding-right: 26px;
+      margin-left: 0; }
+  #footer a.selected {
+    color: #f15934; }
+  #footer .left {
+    float: left;
+    overflow: hidden; }
+    #footer .left a {
+      margin-right: 10px;
+      display: block;
+      float: left;
+      z-index: 1; }

@@ -1,0 +1,9 @@
+.bundle
+log/*
+tmp/*
+public/system/*
+.idea
+.DS_Store
+.thumbs
+static
+.sass-cache

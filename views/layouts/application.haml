@@ -1,31 +1,43 @@
-!!! Strict
-%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+!!! 5
+%html{:lang => "en"}
   %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}
+    %meta{:charset => "utf-8"}
     %title
-      =theme_token
-      | projectName
-    %link{:href => rel_path+"stylesheets/core.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
-    /[if IE 7]
-      %link{:href => rel_path+"stylesheets/ie/7.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
-    /[if IE 6]
-      %link{:href => rel_path+"stylesheets/ie/6.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
-    %script{:src => rel_path+"javascripts/application.js", :type => "text/javascript"}
+      -if defined?(@title)
+        #{@title} | projectName
+      -else
+        projectName
 
+    =stylesheet "stylesheets/library/html5boilerplate"
+    =stylesheet "stylesheets/base"
+    =stylesheet "stylesheets/persistent"
+    =stylesheet "stylesheets/nav"
+    =stylesheet "stylesheets/footer"
+
+
+    =javascript "javascripts/application"
 
   %body
+    #wrap
+      = partial :"partials/header"
+      = partial :"partials/nav"
 
-    #page
-      #wrapper
-        #header
-          %h1
-            %a.hidden-link{:href => rel_path+"index.html"}
-              static-sinatra demo
-          %h2
-            %a.hidden-link{:href => rel_path+theme_token+"/index.html"}
-              =theme_token.capitalize
-        #body-wrapper
-          = partial :'partials/nav', :locals => { :theme_token => theme_token, :is_tertiary => defined?(is_tertiary) ? true : false, :is_home => defined?(is_home) ? true : false, :is_sec => defined?(is_sec) ? true : false }
+      = partial :'partials/sub_nav', :locals => { |
+        :section => defined?(section) ? section : "", |
+        :is_secondary => defined?(is_secondary) ? true : false, |
+        :is_tertiary => defined?(is_tertiary) ? true : false |
+      } |
+
+
+
+      #body-wrapper
+        #background
+        #content
           = yield
-          .cl
-    = partial :'partials/footer'
+        .cl
+
+      = partial :'partials/footer', :locals => { |
+        :section => defined?(section) ? section : "", |
+        :is_secondary => defined?(is_secondary) ? true : false, |
+        :is_tertiary => defined?(is_tertiary) ? true : false |
+      } |

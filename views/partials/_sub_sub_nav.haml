@@ -1,0 +1,15 @@
+-navigation.each_index do |primary_idx|
+  -primary_hash  = navigation[primary_idx]
+  -primary_token = get_token  primary_hash
+  -if url_match?(primary_token)
+    -primary_hash[:children].each_with_index do |secondary_hash, secondary_idx|
+      -secondary_token = get_token secondary_hash
+        -if secondary_hash[:children] and url_match?(secondary_token)
+        
+      .nav.sub-nav.sub-sub-nav
+        %ul
+          -secondary_hash[:children].each_with_index do |tertiary_hash, tertiary_idx|
+            -tertiary_token = get_token  tertiary_hash
+            %li
+              %a{:href => '/' + primary_token + '/' + secondary_token + '/' + tertiary_token +'/index.html', :class => url_match?(tertiary_token) ? "selected" : ""}
+                =tertiary_hash[:title]

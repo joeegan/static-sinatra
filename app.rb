@@ -1,33 +1,33 @@
 # rubygems required
-require 'rubygems'
 require 'sinatra'
+require 'sinatra/reloader'
+require 'redcloth_scan'
 require 'compass'
-require 'haml'
-
-# general purpose helpers
-require 'helpers/utilities'
-helpers Sinatra::Utilities
-
-# application specific helpers
-require 'helpers/navigation'
-helpers Sinatra::Navigation
-require 'helpers/custom'
-helpers Sinatra::Custom
-
-# ensure that every rack request creates a new css file
 require 'sass/plugin/rack'
-use Sass::Plugin::Rack
-Sass::Plugin.options[:css_location] = "public/stylesheets"
-Sass::Plugin.options[:template_location] = "views/sass"
+require 'haml'
 
 # set sinatra's variables
 set :app_file, __FILE__
 set :root, File.dirname(__FILE__)
 APP_ROOT = File.dirname(__FILE__)
 set :views, "views"
-set :public, "public"
+set :public_folder, "public"
+set :static_cache_control, [:public_folder, :max_age => 300]
 
-# compass (Sass toolkit) config
+# import our helpers
+require './helpers/utilities'
+helpers Sinatra::Utilities
+require './helpers/navigation'
+helpers Sinatra::Navigation
+require './helpers/custom'
+helpers Sinatra::Custom
+
+# ensure that every rack request creates a new css file
+use Sass::Plugin::Rack
+Sass::Plugin.options[:css_location] = "public/stylesheets"
+Sass::Plugin.options[:template_location] = "views/sass"
+
+# compass/sass config
 configure do
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
@@ -40,11 +40,18 @@ configure do
   set :sass, Compass.sass_engine_options
 end
 
+
 # routes
 
 get '/stylesheets/:name' do
   content_type 'text/css', :charset => 'utf-8'
   sass(:"sass/#{params[:name]}", Compass.sass_engine_options )
+end
+
+['/','/index.html'].each do |path|
+  get path do
+    redirect to('/fish/index.html')
+  end
 end
 
 get "/index.html" do
@@ -53,44 +60,34 @@ get "/index.html" do
   }
 end
 
-get "/README.html" do
-  haml :"README", {
-    :layout => :"layouts/docs"
-  }
-end
-
-get "/:theme/index.html" do
-  haml :"pages/#{params[:theme]}/index", {
+get "/:primary/index.html" do
+  haml :"pages/#{params[:primary]}/index", {
     :layout => :"layouts/application", :locals => {
-      :theme_token => params[:theme],
-      :theme_url => params[:theme]+"/",
-      :is_home => true
+      :primary_token => params[:primary],
+      :primary_url => params[:primary]+"/",
+      :is_primary => true
     }
   }
 end
 
-
-# TERTIARY PAGES
-get "/:theme/:audience/:seg1/:seg2/index.html" do
-  haml :"pages/#{params[:theme]}/#{params[:audience]}/#{params[:seg1]}/#{params[:seg2]}/index", {
+get "/:primary/:secondary/index.html" do
+  haml :"pages/#{params[:primary]}/#{params[:secondary]}/index", {
     :layout => :"layouts/application", :locals => {
-      :audience_name => params[:audience],
-      :theme_token => params[:theme],
-      :theme_url => params[:theme]+"/",
+      :secondary_name => params[:secondary],
+      :primary_token => params[:primary],
+      :primary_url => params[:primary]+"/",
+      :is_secondary => true
+    }
+  }
+end
+
+get "/:primary/:secondary/:tertiary/index.html" do
+  haml :"pages/#{params[:primary]}/#{params[:secondary]}/#{params[:tertiary]}/index", {
+    :layout => :"layouts/application", :locals => {
+      :secondary_name => params[:secondary],
+      :primary_token => params[:primary],
+      :primary_url => params[:primary]+"/",
       :is_tertiary => true
-    }
-  }
-
-end
-
-
-# ALL PAGES
-get "/:theme/:audience/*/index.html" do
-  haml :"pages/#{params[:theme]}/#{params[:audience]}/#{params[:splat].to_s}/index", {
-    :layout => :"layouts/application", :locals => {
-      :audience_name => params[:audience],
-      :theme_token => params[:theme],
-      :theme_url => params[:theme]+"/"
     }
   }
 end

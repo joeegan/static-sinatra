@@ -33,18 +33,24 @@ module Sinatra::Utilities
 
   def url_match? input
     if input.class == String
-      return true if request.fullpath.include? input
+      return true if request.fullpath.include? '/' + input + '/'
     elsif input.class == Hash
       input.each_value do |str|
-        return true if request.fullpath.include? str
+        return true if request.fullpath.include? '/' + str + '/'
       end
     elsif input.class == Array
       input.each do |str|
-        return true if request.fullpath.include? str.to_s
+        return true if request.fullpath.include? '/' + str.to_s + '/'
       end
     end
   end
 
+  def url_match_with_index? input
+    if input.class == String
+      return true if request.fullpath.include? '/' + input + '/index.html'
+    end
+  end
+  
   def partial(template, *args)
     template_array = template.to_s.split('/')
     template = template_array[0..-2].join('/') + "/_#{template_array[-1]}"
@@ -62,6 +68,14 @@ module Sinatra::Utilities
 
   def num_array 
     num_array = ["one", "two", "three", "four", "five", "six", "seven"]
+  end
+
+  def stylesheet name
+    "<link href='" + rel_path + name + ".css' media='screen' rel='stylesheet' type='text/css' />"
+  end
+
+  def javascript name
+    "<script src='" + rel_path + name + ".js'></script>"
   end
 
 end
