@@ -22,13 +22,13 @@
       = partial :"partials/header"
       = partial :"partials/nav"
 
-      = partial :'partials/sub_nav', :locals => { |
+      = partial :"partials/secondary_nav", :locals => { |
         :section => defined?(section) ? section : "", |
         :is_secondary => defined?(is_secondary) ? true : false, |
         :is_tertiary => defined?(is_tertiary) ? true : false |
       } |
 
-
+      = partial :"partials/tertiary_nav", :locals => { :section => defined?(section) ? section : "", :is_secondary => defined?(is_secondary) ? true : false, :is_tertiary => defined?(is_tertiary) ? true : false }
 
       #body-wrapper
         #background
@@ -36,7 +36,7 @@
           = yield
         .cl
 
-      = partial :'partials/footer', :locals => { |
+      = partial :"partials/footer", :locals => { |
         :section => defined?(section) ? section : "", |
         :is_secondary => defined?(is_secondary) ? true : false, |
         :is_tertiary => defined?(is_tertiary) ? true : false |
