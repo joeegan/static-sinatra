@@ -1,7 +1,6 @@
 # required rubygems
 require 'sinatra'
 require 'sinatra/reloader'
-require 'redcloth_scan'
 require 'compass'
 require 'sass/plugin/rack'
 require 'haml'
@@ -34,7 +33,9 @@ end
 
 ['/','/index.html'].each do |path|
   get path do
-    redirect to('/fish/index.html')
+    haml :"pages/index", {
+      :layout => :"layouts/application"
+    }
   end
 end
 

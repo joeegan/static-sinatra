@@ -9,6 +9,6 @@
       -first_token_of_secondary_nav = primary_hash[:children][0][:rewrite] || convert_to_url_token(primary_hash[:children][0][:title])
 
       %li{:class => num_array[primary_idx]}
-        %a{:href => '../../' + primary_token + "/index.html", :class => url_match?(primary_token) ? "selected" : ""}
+        %a{:href => rel_path + primary_token + "/index.html", :class => url_match?(primary_token) ? "selected" : ""}
           =primary_hash[:title]
           

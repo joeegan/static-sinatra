@@ -36,9 +36,3 @@
         #content
           = yield
         .cl
-
-      = partial :"partials/footer", :locals => { |
-        :section => defined?(section) ? section : "", |
-        :is_secondary => defined?(is_secondary) ? true : false, |
-        :is_tertiary => defined?(is_tertiary) ? true : false |
-      } |
